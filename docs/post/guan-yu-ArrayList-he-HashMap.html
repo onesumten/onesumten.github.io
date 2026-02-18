@@ -10,13 +10,13 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="Hello World。">
-<meta property="og:title" content="Test">
-<meta property="og:description" content="Hello World。">
+<meta name="description" content="ArrayList是一个实现类，它使用一个dynamic array来实现它的功能。">
+<meta property="og:title" content="关于ArrayList和HashMap">
+<meta property="og:description" content="ArrayList是一个实现类，它使用一个dynamic array来实现它的功能。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://onesumten.github.io/post/Test.html">
+<meta property="og:url" content="https://onesumten.github.io/post/guan-yu-ArrayList-he-HashMap.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/128906322?v=4&size=64">
-<title>Test</title>
+<title>关于ArrayList和HashMap</title>
 
 
 
@@ -49,7 +49,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
 <body>
     <div id="header">
-<h1 class="postTitle">Test</h1>
+<h1 class="postTitle">关于ArrayList和HashMap</h1>
 <div class="title-right">
     <a href="https://onesumten.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
         <svg class="octicon" width="16" height="16">
@@ -57,7 +57,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         </svg>
     </a>
     
-    <a href="https://github.com/onesumten/onesumten.github.io/issues/1" target="_blank" class="btn btn-invisible circle" title="Issue">
+    <a href="https://github.com/onesumten/onesumten.github.io/issues/6" target="_blank" class="btn btn-invisible circle" title="Issue">
         <svg class="octicon" width="16" height="16">
             <path id="pathIssue" fill-rule="evenodd"></path>
         </svg>
@@ -73,7 +73,54 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><p>Hello World</p></div>
+<div class="markdown-body" id="postBody"><p>ArrayList是一个实现类，它使用一个dynamic array来实现它的功能。它可以让后面的数据无限制的加入到这个List中。<br>
+我们可以使用get.(0)类似的功能来获取到这个List的第一个元素。（其中0是其index)</p>
+<p>HashMap是一个实现类，它可以让使用者快速查找其value对应的key.</p>
+<p><code class="notranslate">Arrays.asList()</code> 是一个静态工具方法，它的作用是：</p>
+<ol>
+<li>接受任意数量的参数（零个、一个或多个）。</li>
+<li>返回一个<strong>固定大小的 <code class="notranslate">List</code> 视图</strong>，该列表包含你传入的这些元素。</li>
+</ol>
+<h3>示例解释</h3>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th><strong>调用方式</strong></th>
+<th><strong>预期返回的 List 类型（基于上下文）</strong></th>
+<th><strong>内部元素</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="notranslate">asList()</code></td>
+<td><code class="notranslate">List&lt;GraphNode&lt;Integer&gt;&gt;</code> 或 <code class="notranslate">List&lt;Integer&gt;</code></td>
+<td>空列表 <code class="notranslate">[]</code></td>
+</tr>
+<tr>
+<td><code class="notranslate">asList(node1)</code></td>
+<td><code class="notranslate">List&lt;GraphNode&lt;Integer&gt;&gt;</code></td>
+<td><code class="notranslate">[node1]</code></td>
+</tr>
+<tr>
+<td><code class="notranslate">asList(2)</code></td>
+<td><code class="notranslate">List&lt;Integer&gt;</code></td>
+<td><code class="notranslate">[2]</code></td>
+</tr>
+<tr>
+<td><code class="notranslate">asList(node1, node2)</code></td>
+<td><code class="notranslate">List&lt;GraphNode&lt;Integer&gt;&gt;</code></td>
+<td><code class="notranslate">[node1, node2]</code></td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<ul>
+<li>
+<p><code class="notranslate">Arrays.asList()</code> 返回的列表是<strong>固定大小</strong>的。你不能使用 <code class="notranslate">.add()</code> 或 <code class="notranslate">.remove()</code> 来改变它的大小，否则会抛出 <code class="notranslate">UnsupportedOperationException</code>。</p>
+</li>
+<li>
+<p><strong>但是</strong>，如果你修改了列表中的<strong>元素本身</strong>（例如，如果你传入的是一个对象引用），那么原始对象是会被修改的。</p>
+</li>
+</ul></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
