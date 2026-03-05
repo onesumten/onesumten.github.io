@@ -41,4 +41,3 @@
 
 # Operation precedence
 * NOT > AND >  OR
-* 1
