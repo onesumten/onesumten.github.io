@@ -38,3 +38,6 @@
 | 1 | 0 | 1 |
 | 1 | 1 | 0 |
 * Note: When the input is 0 and 1, the output must 1
+
+# Operation precedence
+* NOT > AND >  OR
