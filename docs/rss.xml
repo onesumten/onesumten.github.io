@@ -1,11 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Solid Wang</title><link>https://onesumten.github.io</link><description>Personal Blog</description><copyright>Solid Wang</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/128906322?v=4&amp;size=64</url><title>avatar</title><link>https://onesumten.github.io</link></image><lastBuildDate>Sun, 08 Mar 2026 09:31:51 +0000</lastBuildDate><managingEditor>Solid Wang</managingEditor><ttl>60</ttl><webMaster>Solid Wang</webMaster><item><title>Digital circuits</title><link>https://onesumten.github.io/post/Digital%20circuits.html</link><description># Classification of Digital Circuits
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Solid Wang</title><link>https://onesumten.github.io</link><description>Personal Blog</description><copyright>Solid Wang</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/128906322?v=4&amp;size=64</url><title>avatar</title><link>https://onesumten.github.io</link></image><lastBuildDate>Wed, 11 Mar 2026 20:57:42 +0000</lastBuildDate><managingEditor>Solid Wang</managingEditor><ttl>60</ttl><webMaster>Solid Wang</webMaster><item><title>Digital circuits</title><link>https://onesumten.github.io/post/Digital%20circuits.html</link><description># Classification of Digital Circuits
 ## Combinational Circuit 
 * Output depends only on the combination of input values
 * Memory-less (a distinct and critical feature)
 * All logic gates are combinational
 &lt;img width='1063' height='669' alt='Image' src='https://github.com/user-attachments/assets/d3778dcf-c7a7-461b-96ea-e3812145fd2d' /&gt;
 &lt;img width='1000' height='650' alt='Image' src='https://github.com/user-attachments/assets/95d3661e-5708-4598-b672-8ed6211f7cb0' /&gt;
+
 ## Sequential Circuit
 * Output depends on the current input combination, and history of inputs
 * The sequence of inputs over time determine the output
