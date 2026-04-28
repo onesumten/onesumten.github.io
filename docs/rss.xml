@@ -1,2 +1,70 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Solid Wang</title><link>https://onesumten.github.io</link><description>Personal Blog</description><copyright>Solid Wang</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/128906322?v=4&amp;size=64</url><title>avatar</title><link>https://onesumten.github.io</link></image><lastBuildDate>Mon, 27 Apr 2026 17:25:13 +0000</lastBuildDate><managingEditor>Solid Wang</managingEditor><ttl>60</ttl><webMaster>Solid Wang</webMaster></channel></rss>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Solid Wang</title><link>https://onesumten.github.io</link><description>Personal Blog</description><copyright>Solid Wang</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/128906322?v=4&amp;size=64</url><title>avatar</title><link>https://onesumten.github.io</link></image><lastBuildDate>Tue, 28 Apr 2026 17:48:55 +0000</lastBuildDate><managingEditor>Solid Wang</managingEditor><ttl>60</ttl><webMaster>Solid Wang</webMaster><item><title>Digital circuits</title><link>https://onesumten.github.io/post/Digital%20circuits.html</link><description># Classification of Digital Circuits
+## Combinational Circuit 
+* Output depends only on the combination of input values
+* Memory-less (a distinct and critical feature)
+* All logic gates are combinational
+&lt;img width='1063' height='669' alt='Image' src='https://github.com/user-attachments/assets/d3778dcf-c7a7-461b-96ea-e3812145fd2d' /&gt;
+&lt;img width='1000' height='650' alt='Image' src='https://github.com/user-attachments/assets/95d3661e-5708-4598-b672-8ed6211f7cb0' /&gt;
+
+## Sequential Circuit
+* Output depends on the current input combination, and history of inputs
+* The sequence of inputs over time determine the output
+* Sequential circuits have a state or memory。</description><guid isPermaLink="true">https://onesumten.github.io/post/Digital%20circuits.html</guid><pubDate>Sun, 08 Mar 2026 09:31:26 +0000</pubDate></item><item><title>logic gate(OR, AND, XOR, NOR, NAND)</title><link>https://onesumten.github.io/post/logic%20gate%28OR%2C%20AND%2C%20XOR%2C%20NOR%2C%20NAND%29.html</link><description># OR
+| input A | input B | output C |
+| :---: | :---: | :---: |
+| 0 | 0 | 0 |
+| 0 | 1 | 1 |
+| 1 | 0 | 1 |
+| 1 | 1 | 1 |
+* Note: When the input is 1, the output must 1. 
+# NOR
+| input A | input B | output C |
+| :---: | :---: | :---: |
+| 0 | 0 | 1 |
+| 0 | 1 | 0 |
+| 1 | 0 | 0 |
+| 1 | 1 | 0 |
+* Note: When the input is 1, the output must 0.
+# AND
+| input A | input B | output C |
+| :---: | :---: | :---: |
+| 0 | 0 | 0 |
+| 0 | 1 | 0 |
+| 1 | 0 | 0 |
+| 1 | 1 | 1 |
+* Note: When the all input is 1, the ouput must 1.
+# NAND
+| input A | input B | output C |
+| :---: | :---: | :---: |
+| 0 | 0 | 1 |
+| 0 | 1 | 1 |
+| 1 | 0 | 1 |
+| 1 | 1 | 0 |
+* Note: When the all input is 1, the ouput must 0.
+# XOR
+| input A | input B | output C |
+| :---: | :---: | :---: |
+| 0 | 0 | 0 |
+| 0 | 1 | 1 |
+| 1 | 0 | 1 |
+| 1 | 1 | 0 |
+* Note: When the input is 0 and 1, the output must 1
+
+# Operation precedence
+* NOT &gt; AND &gt;  OR。</description><guid isPermaLink="true">https://onesumten.github.io/post/logic%20gate%28OR%2C%20AND%2C%20XOR%2C%20NOR%2C%20NAND%29.html</guid><pubDate>Wed, 04 Mar 2026 03:01:17 +0000</pubDate></item><item><title>防御性编程的技巧</title><link>https://onesumten.github.io/post/fang-yu-xing-bian-cheng-de-ji-qiao.html</link><description>当你写一个构造函数（或任何方法），它接收一个可变对象（Mutable Object）作为参数，并且要把这个对象存下来作为你类的一部分（即存入一个字段/成员变量），你就必须创建它的防御性拷贝（Defensive Copy）。</description><guid isPermaLink="true">https://onesumten.github.io/post/fang-yu-xing-bian-cheng-de-ji-qiao.html</guid><pubDate>Wed, 18 Feb 2026 00:24:35 +0000</pubDate></item><item><title>常用于字符串的几个方法</title><link>https://onesumten.github.io/post/chang-yong-yu-zi-fu-chuan-de-ji-ge-fang-fa.html</link><description>### 1. `indexOf()` 方法：查找位置
+
+`indexOf()` 方法用于在字符串中查找**第一次**出现指定字符或子字符串的**索引（位置）**。</description><guid isPermaLink="true">https://onesumten.github.io/post/chang-yong-yu-zi-fu-chuan-de-ji-ge-fang-fa.html</guid><pubDate>Wed, 18 Feb 2026 00:24:03 +0000</pubDate></item><item><title>关于ArrayList和HashMap</title><link>https://onesumten.github.io/post/guan-yu-ArrayList-he-HashMap.html</link><description>ArrayList是一个实现类，它使用一个dynamic array来实现它的功能。</description><guid isPermaLink="true">https://onesumten.github.io/post/guan-yu-ArrayList-he-HashMap.html</guid><pubDate>Wed, 18 Feb 2026 00:23:44 +0000</pubDate></item><item><title>Optional interface的一些方法</title><link>https://onesumten.github.io/post/Optional%20interface-de-yi-xie-fang-fa.html</link><description>```
+vertx.ifPresent(nextInventory::add)
+```
+**如果**这个 `Optional` 容器中**存在**一个值（Optional.of('RedKey')），那么就对这个值执行提供的操作；如果容器是空（Optional.empty()）的，就什么也不做。</description><guid isPermaLink="true">https://onesumten.github.io/post/Optional%20interface-de-yi-xie-fang-fa.html</guid><pubDate>Wed, 18 Feb 2026 00:23:19 +0000</pubDate></item><item><title>Map接口中的一些方法</title><link>https://onesumten.github.io/post/Map-jie-kou-zhong-de-yi-xie-fang-fa.html</link><description>```
+V merge(K key, V value, BiFunction remappingFunction)
+```
+- **`K key`**： 你要操作的**键**。</description><guid isPermaLink="true">https://onesumten.github.io/post/Map-jie-kou-zhong-de-yi-xie-fang-fa.html</guid><pubDate>Wed, 18 Feb 2026 00:22:54 +0000</pubDate></item><item><title>ini文件解析功能内容</title><link>https://onesumten.github.io/post/ini-wen-jian-jie-xi-gong-neng-nei-rong.html</link><description>```
+final Pattern SECTION_PATTERN = Pattern.compile('^\\[(.+)]$');
+```
+这里的Pattern是一个类
+complie()：**将一个字符串形式的正则表达式，转换（或“编译”）成一个 `Pattern` 对象。</description><guid isPermaLink="true">https://onesumten.github.io/post/ini-wen-jian-jie-xi-gong-neng-nei-rong.html</guid><pubDate>Wed, 18 Feb 2026 00:21:57 +0000</pubDate></item><item><title>Deque and Queue Interface</title><link>https://onesumten.github.io/post/Deque%20and%20Queue%20Interface.html</link><description>**Deque** (Double-Ended Queue) 接口继承自 `Queue` 接口。</description><guid isPermaLink="true">https://onesumten.github.io/post/Deque%20and%20Queue%20Interface.html</guid><pubDate>Wed, 18 Feb 2026 00:20:58 +0000</pubDate></item><item><title>Collection interface的一些方法</title><link>https://onesumten.github.io/post/Collection%20interface-de-yi-xie-fang-fa.html</link><description>```
+contains(itemName)
+```
+`contains` 这个方法的返回类型就是 **`boolean`**（布尔值）。</description><guid isPermaLink="true">https://onesumten.github.io/post/Collection%20interface-de-yi-xie-fang-fa.html</guid><pubDate>Tue, 17 Feb 2026 03:54:55 +0000</pubDate></item></channel></rss>
