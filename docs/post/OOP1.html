@@ -152,7 +152,52 @@ print(1, 2); // 编译报错！
 <li>当我们使用a==b的时候，complier会比较a和b的引用地址如果a和b都是Integer这样的包装类，</li>
 </ul>
 </li>
-</ol></div>
+</ol>
+<h1>设计方法</h1>
+<ol>
+<li>combination（组合）
+<ul>
+<li>表示同生共死，如果这个class的周期结束了，那么与这个class形成combination关系的class也会结束。且外界无法干扰这个对象的生命周期。</li>
+</ul>
+</li>
+</ol>
+<pre class="notranslate"><code class="notranslate">public class Computer {
+    private GraphicsCard card = new GraphicsCard(); // 内部 new，强绑定
+    
+    // 显卡的生命周期完全由 Computer 掌控
+}
+</code></pre>
+<ol start="2">
+<li>aggregation（聚合）
+<ul>
+<li>这里的monitor对象是在外面new好了传进来的，就算目前这个class的生命周期结束了，这个monitor也不会消失，还是会存在。</li>
+</ul>
+</li>
+</ol>
+<pre class="notranslate"><code class="notranslate">public class Computer {
+    private Monitor monitor;
+
+    // Monitor 是外面 new 好了传进来的
+    public void setMonitor(Monitor monitor) {
+        this.monitor = monitor;
+    }
+}
+</code></pre>
+<ol start="3">
+<li>dependency（依赖）
+<ul>
+<li>在一个class中的方法中短暂的使用另外一个class的对象。</li>
+</ul>
+</li>
+</ol>
+<pre class="notranslate"><code class="notranslate">public class Computer {
+    public void printDocument(String text) {
+        // 打印机只是在这里临时 new 出来用一下，方法结束，关系解除
+        Printer printer = new Printer();
+        printer.print(text);
+    }
+}
+</code></pre></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
