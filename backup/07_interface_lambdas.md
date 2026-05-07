@@ -13,7 +13,7 @@ public interface Comparable {
 ```
 int VALUE = 10;
 ```
-这里VALUE会被定性为public static final，属于这个interface，同时不能再被修改了。
+   * 这里VALUE会被定性为public static final，属于这个interface，同时不能再被修改了。
 6. 在JAVA8之后，你可以通过添加default关键字来让写出一个带有implementation的method，这个method可以被子类直接使用,可以被重写。
 7. 可以写static method，也就是直接使用**接口名字.方法**。这个static method不能被重写。
 8. 也可以写private helper method去帮助接口内部的方法实现，不暴露给外部。
