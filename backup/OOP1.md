@@ -35,3 +35,25 @@ public record User(String name, int age) {
 5. 初始化为 null,var x = null; null 可以是任何引用类型，编译器会罢工。
 6. Lambda 表达式,Lambda 需要目标类型，不能直接赋值给 var（除非强转）。
 7. 数组初始化（简写）,"var arr = {1, 2, 3}; 不行，必须写 new int[]{1, 2, 3}。"
+
+# 方法匹配优先级
+```
+1 (最高),精确原始类型匹配,"print(int a, int b)"
+2,拓宽 (Widening),"print(long a, long b)"
+3,自动装箱 (Boxing),"print(Integer a, Integer b)"
+4 (最低),可变参数 (Varargs),print(int... sums)
+```
+1. 如果两个参数的类型不一样，会导致complier不知道对第一个参数是autobox还是unbox，对第二个参数也是同理。
+```
+// 如果你定义了这两个方法：
+void print(Integer a, int b) {}
+void print(int a, Integer b) {}
+
+// 然后调用：
+print(1, 2); // 编译报错！
+```
+2. unboxing只会发生在下面几种情况中：
+   * 算术运算： 如 a + b, a - b, a * b 等。
+   * 比较运算（含原始类型）： 如 a > 10 或 a == 100（一侧是包装类，另一侧是基本类型 int）。
+   * 赋值给基本类型： int c = a;
+   * 当我们使用a==b的时候，complier会比较a和b的引用地址如果a和b都是Integer这样的包装类，

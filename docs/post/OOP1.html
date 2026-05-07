@@ -126,6 +126,32 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li>初始化为 null,var x = null; null 可以是任何引用类型，编译器会罢工。</li>
 <li>Lambda 表达式,Lambda 需要目标类型，不能直接赋值给 var（除非强转）。</li>
 <li>数组初始化（简写）,"var arr = {1, 2, 3}; 不行，必须写 new int[]{1, 2, 3}。"</li>
+</ol>
+<h1>方法匹配优先级</h1>
+<pre class="notranslate"><code class="notranslate">1 (最高),精确原始类型匹配,"print(int a, int b)"
+2,拓宽 (Widening),"print(long a, long b)"
+3,自动装箱 (Boxing),"print(Integer a, Integer b)"
+4 (最低),可变参数 (Varargs),print(int... sums)
+</code></pre>
+<ol>
+<li>如果两个参数的类型不一样，会导致complier不知道对第一个参数是autobox还是unbox，对第二个参数也是同理。</li>
+</ol>
+<pre class="notranslate"><code class="notranslate">// 如果你定义了这两个方法：
+void print(Integer a, int b) {}
+void print(int a, Integer b) {}
+
+// 然后调用：
+print(1, 2); // 编译报错！
+</code></pre>
+<ol start="2">
+<li>unboxing只会发生在下面几种情况中：
+<ul>
+<li>算术运算： 如 a + b, a - b, a * b 等。</li>
+<li>比较运算（含原始类型）： 如 a &gt; 10 或 a == 100（一侧是包装类，另一侧是基本类型 int）。</li>
+<li>赋值给基本类型： int c = a;</li>
+<li>当我们使用a==b的时候，complier会比较a和b的引用地址如果a和b都是Integer这样的包装类，</li>
+</ul>
+</li>
 </ol></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
