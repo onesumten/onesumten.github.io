@@ -89,7 +89,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <ol>
 <li>interface意味着能做什么，也就是can-do。</li>
 <li>所有在interface中的method都必须声明为public，如果不是那就是default，并且无法正确被重写因为default意思是访问权限只允许在同一个package内。</li>
-<li>compareTo是一个abstract,任何继承了Comparable的类必须提供compareTo方法同时传入参数只能是Object，并且返回是int。在java5之后，<br>
+<li>compareTo是一个abstract,任何实现了Comparable的类必须提供compareTo方法同时传入参数只能是Object，并且返回是int。在java5之后，<br>
 Comparable接口被定义为Comparable。</li>
 </ol>
 <pre class="notranslate"><code class="notranslate">public interface Comparable {
@@ -97,7 +97,8 @@ Comparable接口被定义为Comparable。</li>
 }
 </code></pre>
 <ol start="4">
-<li>Arrays.sort()方法可以对object的array进行分类，从小打大，如果想对这个object的array使用这个sort方法那么这个object的类必须implement Comparable接口。</li>
+<li>Arrays.sort()方法可以对object的array进行分类，从小到大，如果想对这个object的array使用这个sort方法那么这个object的类必须implement Comparable接口。<br>
+如果Arrays.sort(Object[] o)只有一个数组内容,此时sort会强制把o转换为comparable类型，调用它的comparTo方法。如果是**Arrays.sort(T[] a, Comparator&lt;? super T&gt; c)**这种情况就不需要重写，sort方法会根据第二个参数的排序规则排序。</li>
 <li>Interface可以拥有constant，当你写一个：</li>
 </ol>
 <pre class="notranslate"><code class="notranslate">int VALUE = 10;
@@ -105,7 +106,7 @@ Comparable接口被定义为Comparable。</li>
 <ul>
 <li>这里VALUE会被定性为public static final，属于这个interface，同时不能再被修改了。</li>
 </ul>
-<ol start="6">
+<ol>
 <li>在JAVA8之后，你可以通过添加default关键字来让写出一个带有implementation的method，这个method可以被子类直接使用,可以被重写。</li>
 <li>可以写static method，也就是直接使用<strong>接口名字.方法</strong>。这个static method不能被重写。</li>
 <li>也可以写private helper method去帮助接口内部的方法实现，不暴露给外部。</li>
