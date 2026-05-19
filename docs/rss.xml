@@ -1,5 +1,41 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Solid Wang</title><link>https://onesumten.github.io</link><description>Personal Blog</description><copyright>Solid Wang</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/128906322?v=4&amp;size=64</url><title>avatar</title><link>https://onesumten.github.io</link></image><lastBuildDate>Wed, 06 May 2026 12:46:21 +0000</lastBuildDate><managingEditor>Solid Wang</managingEditor><ttl>60</ttl><webMaster>Solid Wang</webMaster><item><title>07_interface_lambdas</title><link>https://onesumten.github.io/post/07_interface_lambdas.html</link><description># Interface
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Solid Wang</title><link>https://onesumten.github.io</link><description>Personal Blog</description><copyright>Solid Wang</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/128906322?v=4&amp;size=64</url><title>avatar</title><link>https://onesumten.github.io</link></image><lastBuildDate>Tue, 19 May 2026 10:49:48 +0000</lastBuildDate><managingEditor>Solid Wang</managingEditor><ttl>60</ttl><webMaster>Solid Wang</webMaster><item><title>ADTs</title><link>https://onesumten.github.io/post/ADTs.html</link><description># Queue
+1. ArrayDeque&lt;E&gt; and LinkedList&lt;E&gt; class
+
+# Collection interface
+1. 有两个基本的方法在Collection接口中
+```java
+public interface Collection&lt;E&gt; extends …
+    {
+    // 添加一个e到collection里，如果成功添加，返回true,如果失败，返回false
+        boolean add(E e);
+        Iterator&lt;E&gt; iterator();
+        …
+    }
+```
+
+# Interator interface
+```java
+public interface Iterator&lt;E&gt;
+    {
+        // 如果至少还有一个元素需要访问，会返回true,否则false
+        boolean hasNext();
+        // 如果在迭代器末尾，再使用next(),会触发NoSuchElementException异常
+        E next();
+        default void remove();
+        default void forEachRemaining(Consumer&lt;? super E&gt; action);
+}
+```
+1. 对于interator来说，需要先请求一个迭代器，然后不断next，直到hasNext方法返回false.
+```java
+Collection&lt;String&gt; coll = …
+Iterator&lt;String&gt; iter = coll.iterator()
+    while (iter.hasNext()) {
+        String element = iter.next();
+        do something with element;
+}
+```
+2. 也可以使用for-each loop实现,因为for-each loop实现了Interator接口，而Collection接口extends了Interator接口，因此，任何实现了Collection接口的都可以直接用在for-each中。</description><guid isPermaLink="true">https://onesumten.github.io/post/ADTs.html</guid><pubDate>Tue, 19 May 2026 10:49:18 +0000</pubDate></item><item><title>07_interface_lambdas</title><link>https://onesumten.github.io/post/07_interface_lambdas.html</link><description># Interface
 1. interface意味着能做什么，也就是can-do。</description><guid isPermaLink="true">https://onesumten.github.io/post/07_interface_lambdas.html</guid><pubDate>Wed, 06 May 2026 12:45:55 +0000</pubDate></item><item><title>OOP2</title><link>https://onesumten.github.io/post/OOP2.html</link><description># 继承(inheritance)
 1. 子类的constructor如果没有使用super，编译器会自动前往父类找寻无参构造器，如果父类没有无参构造器，程序报错。</description><guid isPermaLink="true">https://onesumten.github.io/post/OOP2.html</guid><pubDate>Wed, 06 May 2026 11:38:51 +0000</pubDate></item><item><title>OOP1</title><link>https://onesumten.github.io/post/OOP1.html</link><description># Record
 1. record本身隐性的继承了java.lang.Record类，所以不能继承别的类，也不能被别的类继承，但是可以继承接口。</description><guid isPermaLink="true">https://onesumten.github.io/post/OOP1.html</guid><pubDate>Wed, 06 May 2026 11:38:15 +0000</pubDate></item><item><title>Digital circuits</title><link>https://onesumten.github.io/post/Digital%20circuits.html</link><description># Classification of Digital Circuits
