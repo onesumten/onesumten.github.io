@@ -12,7 +12,23 @@ public interface Collection<E> extends …
         …
     }
 ```
-
+2. 所有实现Collection接口的必须实现下面的方法
+```java
+int size()
+boolean isEmpty()
+boolean contains(Object obj)
+boolean containsAll(Collection<?> c)
+boolean add(E obj)
+boolean addAll(Collection<? extends E> from)
+boolean remove(Object obj)
+boolean removeAll(Collection<?> c)
+boolean retainAll(Collection<?> c)
+void clear()
+Object[] toArray()
+<T> T[] toArray(T[] a)
+default <T> T[]
+toArray(IntFunction<T[]> generator)
+```
 # Interator interface
 ```java
 public interface Iterator<E>
@@ -34,14 +50,14 @@ Iterator<String> iter = coll.iterator()
         do something with element;
 }
 ```
-2. 也可以使用for-each loop实现,因为for-each loop实现了Interator接口，而Collection接口extends了Interator接口，因此，任何实现了Collection接口的都可以直接用在for-each中。
+1. 也可以使用for-each loop实现,因为for-each loop实现了Interator接口，而Collection接口extends了Interator接口，因此，任何实现了Collection接口的都可以直接用在for-each中。
 ```java
 for (String element : coll ) {
     do something with element;
 }
 ```
-3. 一开始，迭代器会生成在第一个元素左边，使用next方法后迭代器会跳转到第二个元素左边的空隙中，然后会返回第一个元素的引用。
-4. 有两个方法分别是
+1. 一开始，迭代器会生成在第一个元素左边，使用next方法后迭代器会跳转到第二个元素左边的空隙中，然后会返回第一个元素的引用。
+2. 有两个方法分别是
    * Collection类的`forEach`：这个方法会遍历集合的所有元素。
     ```java
     // 假设这是你的集合

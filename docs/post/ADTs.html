@@ -24,7 +24,23 @@ public interface Collection<E> extends …
         …
     }
 ```
-
+2. 所有实现Collection接口的必须实现下面的方法
+```java
+int size()
+boolean isEmpty()
+boolean contains(Object obj)
+boolean containsAll(Collection<?> c)
+boolean add(E obj)
+boolean addAll(Collection<? extends E> from)
+boolean remove(Object obj)
+boolean removeAll(Collection<?> c)
+boolean retainAll(Collection<?> c)
+void clear()
+Object[] toArray()
+<T> T[] toArray(T[] a)
+default <T> T[]
+toArray(IntFunction<T[]> generator)
+```
 # Interator interface
 ```java
 public interface Iterator<E>
@@ -46,7 +62,7 @@ Iterator<String> iter = coll.iterator()
         do something with element;
 }
 ```
-2. 也可以使用for-each loop实现,因为for-each loop实现了Interator接口，而Collection接口extends了Interator接口，因此，任何实现了Collection接口的都可以直接用在for-each中。">
+1. 也可以使用for-each loop实现,因为for-each loop实现了Interator接口，而Collection接口extends了Interator接口，因此，任何实现了Collection接口的都可以直接用在for-each中。">
 <meta property="og:title" content="ADTs">
 <meta property="og:description" content="# Queue
 1. ArrayDeque<E> and LinkedList<E> class
@@ -62,7 +78,23 @@ public interface Collection<E> extends …
         …
     }
 ```
-
+2. 所有实现Collection接口的必须实现下面的方法
+```java
+int size()
+boolean isEmpty()
+boolean contains(Object obj)
+boolean containsAll(Collection<?> c)
+boolean add(E obj)
+boolean addAll(Collection<? extends E> from)
+boolean remove(Object obj)
+boolean removeAll(Collection<?> c)
+boolean retainAll(Collection<?> c)
+void clear()
+Object[] toArray()
+<T> T[] toArray(T[] a)
+default <T> T[]
+toArray(IntFunction<T[]> generator)
+```
 # Interator interface
 ```java
 public interface Iterator<E>
@@ -84,7 +116,7 @@ Iterator<String> iter = coll.iterator()
         do something with element;
 }
 ```
-2. 也可以使用for-each loop实现,因为for-each loop实现了Interator接口，而Collection接口extends了Interator接口，因此，任何实现了Collection接口的都可以直接用在for-each中。">
+1. 也可以使用for-each loop实现,因为for-each loop实现了Interator接口，而Collection接口extends了Interator接口，因此，任何实现了Collection接口的都可以直接用在for-each中。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://onesumten.github.io/post/ADTs.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/128906322?v=4&size=64">
@@ -170,6 +202,23 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         <span class="pl-smi">Iterator</span>&lt;<span class="pl-smi">E</span>&gt; <span class="pl-en">iterator</span>();
         …
     }</pre></div>
+<ol start="2">
+<li>所有实现Collection接口的必须实现下面的方法</li>
+</ol>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-smi">int</span> <span class="pl-en">size</span>()
+<span class="pl-smi">boolean</span> <span class="pl-en">isEmpty</span>()
+<span class="pl-smi">boolean</span> <span class="pl-en">contains</span>(<span class="pl-smi">Object</span> <span class="pl-s1">obj</span>)
+<span class="pl-smi">boolean</span> <span class="pl-en">containsAll</span>(<span class="pl-smi">Collection</span>&lt;?&gt; <span class="pl-s1">c</span>)
+<span class="pl-smi">boolean</span> <span class="pl-en">add</span>(<span class="pl-smi">E</span> <span class="pl-s1">obj</span>)
+<span class="pl-smi">boolean</span> <span class="pl-en">addAll</span>(<span class="pl-smi">Collection</span>&lt;? <span class="pl-k">extends</span> <span class="pl-smi">E</span>&gt; <span class="pl-s1">from</span>)
+<span class="pl-smi">boolean</span> <span class="pl-en">remove</span>(<span class="pl-smi">Object</span> <span class="pl-s1">obj</span>)
+<span class="pl-smi">boolean</span> <span class="pl-en">removeAll</span>(<span class="pl-smi">Collection</span>&lt;?&gt; <span class="pl-s1">c</span>)
+<span class="pl-smi">boolean</span> <span class="pl-en">retainAll</span>(<span class="pl-smi">Collection</span>&lt;?&gt; <span class="pl-s1">c</span>)
+<span class="pl-smi">void</span> <span class="pl-en">clear</span>()
+<span class="pl-smi">Object</span>[] <span class="pl-en">toArray</span>()
+&lt;<span class="pl-smi">T</span>&gt; <span class="pl-smi">T</span>[] <span class="pl-en">toArray</span>(<span class="pl-smi">T</span>[] <span class="pl-s1">a</span>)
+<span class="pl-k">default</span> &lt;<span class="pl-smi">T</span>&gt; <span class="pl-smi">T</span>[]
+<span class="pl-en">toArray</span>(<span class="pl-smi">IntFunction</span>&lt;<span class="pl-smi">T</span>[]&gt; <span class="pl-s1">generator</span>)</pre></div>
 <h1>Interator interface</h1>
 <div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">public</span> <span class="pl-k">interface</span> <span class="pl-smi">Iterator</span>&lt;<span class="pl-smi">E</span>&gt;
     {
@@ -189,13 +238,13 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         <span class="pl-smi">String</span> <span class="pl-s1">element</span> = <span class="pl-s1">iter</span>.<span class="pl-en">next</span>();
         <span class="pl-k">do</span> <span class="pl-smi">something</span> <span class="pl-s1">with</span> <span class="pl-s1">element</span>;
 }</pre></div>
-<ol start="2">
+<ol>
 <li>也可以使用for-each loop实现,因为for-each loop实现了Interator接口，而Collection接口extends了Interator接口，因此，任何实现了Collection接口的都可以直接用在for-each中。</li>
 </ol>
 <div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">for</span> (<span class="pl-smi">String</span> <span class="pl-s1">element</span> : <span class="pl-s1">coll</span> ) {
     <span class="pl-k">do</span> <span class="pl-smi">something</span> <span class="pl-s1">with</span> <span class="pl-s1">element</span>;
 }</pre></div>
-<ol start="3">
+<ol>
 <li>一开始，迭代器会生成在第一个元素左边，使用next方法后迭代器会跳转到第二个元素左边的空隙中，然后会返回第一个元素的引用。</li>
 <li>有两个方法分别是
 <ul>
