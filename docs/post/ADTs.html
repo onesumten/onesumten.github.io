@@ -10,8 +10,19 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="# Queue
-1. ArrayDeque<E> and LinkedList<E> class
+<meta name="description" content="# Collection interface中常用的实现类
+1. List
+   * ArrayList: An indexed sequence that grows and shrinks dynamically.
+   * LinkedList: An ordered sequence that allows efficient insertion and removal at any location.
+2. Deque
+   * ArrayDeque: A double-ended queue that is implemented as a circular array.
+3. Queue
+   * PriorityQueue: A collection that allows efficient removal of the smallest element.
+4. Set
+   * HashSet: An unordered collection that rejects duplicates, and allows for efficient lookup of elements.
+   * TreeSet: A sorted set.
+   * EnumSet: A set of enumerated type values.
+   * LinkedHashSet: A set that remembers the order in which the elements were inserted.
 
 # Collection interface
 1. 有两个基本的方法在Collection接口中
@@ -41,31 +52,21 @@ Object[] toArray()
 default <T> T[]
 toArray(IntFunction<T[]> generator)
 ```
-# Interator interface
-```java
-public interface Iterator<E>
-    {
-        // 如果至少还有一个元素需要访问，会返回true,否则false
-        boolean hasNext();
-        // 如果在迭代器末尾，再使用next(),会触发NoSuchElementException异常
-        E next();
-        default void remove();
-        default void forEachRemaining(Consumer<? super E> action);
-}
-```
-1. 对于interator来说，需要先请求一个迭代器，然后不断next，直到hasNext方法返回false.
-```java
-Collection<String> coll = …
-Iterator<String> iter = coll.iterator()
-    while (iter.hasNext()) {
-        String element = iter.next();
-        do something with element;
-}
-```
-1. 也可以使用for-each loop实现,因为for-each loop实现了Interator接口，而Collection接口extends了Interator接口，因此，任何实现了Collection接口的都可以直接用在for-each中。">
+3. AbstractCollection class是继承了Collection接口的一个抽象类，目的是为了减少重复代码书写，除了两个方法外其余的方法都有实现体，只要实现了这两个方法那么AbstractCollection类就可以帮你推导并实现其他方法。">
 <meta property="og:title" content="ADTs">
-<meta property="og:description" content="# Queue
-1. ArrayDeque<E> and LinkedList<E> class
+<meta property="og:description" content="# Collection interface中常用的实现类
+1. List
+   * ArrayList: An indexed sequence that grows and shrinks dynamically.
+   * LinkedList: An ordered sequence that allows efficient insertion and removal at any location.
+2. Deque
+   * ArrayDeque: A double-ended queue that is implemented as a circular array.
+3. Queue
+   * PriorityQueue: A collection that allows efficient removal of the smallest element.
+4. Set
+   * HashSet: An unordered collection that rejects duplicates, and allows for efficient lookup of elements.
+   * TreeSet: A sorted set.
+   * EnumSet: A set of enumerated type values.
+   * LinkedHashSet: A set that remembers the order in which the elements were inserted.
 
 # Collection interface
 1. 有两个基本的方法在Collection接口中
@@ -95,28 +96,7 @@ Object[] toArray()
 default <T> T[]
 toArray(IntFunction<T[]> generator)
 ```
-# Interator interface
-```java
-public interface Iterator<E>
-    {
-        // 如果至少还有一个元素需要访问，会返回true,否则false
-        boolean hasNext();
-        // 如果在迭代器末尾，再使用next(),会触发NoSuchElementException异常
-        E next();
-        default void remove();
-        default void forEachRemaining(Consumer<? super E> action);
-}
-```
-1. 对于interator来说，需要先请求一个迭代器，然后不断next，直到hasNext方法返回false.
-```java
-Collection<String> coll = …
-Iterator<String> iter = coll.iterator()
-    while (iter.hasNext()) {
-        String element = iter.next();
-        do something with element;
-}
-```
-1. 也可以使用for-each loop实现,因为for-each loop实现了Interator接口，而Collection接口extends了Interator接口，因此，任何实现了Collection接口的都可以直接用在for-each中。">
+3. AbstractCollection class是继承了Collection接口的一个抽象类，目的是为了减少重复代码书写，除了两个方法外其余的方法都有实现体，只要实现了这两个方法那么AbstractCollection类就可以帮你推导并实现其他方法。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://onesumten.github.io/post/ADTs.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/128906322?v=4&size=64">
@@ -187,9 +167,32 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><h1>Queue</h1>
+<div class="markdown-body" id="postBody"><h1>Collection interface中常用的实现类</h1>
 <ol>
-<li>ArrayDeque and LinkedList class</li>
+<li>List
+<ul>
+<li>ArrayList: An indexed sequence that grows and shrinks dynamically.</li>
+<li>LinkedList: An ordered sequence that allows efficient insertion and removal at any location.</li>
+</ul>
+</li>
+<li>Deque
+<ul>
+<li>ArrayDeque: A double-ended queue that is implemented as a circular array.</li>
+</ul>
+</li>
+<li>Queue
+<ul>
+<li>PriorityQueue: A collection that allows efficient removal of the smallest element.</li>
+</ul>
+</li>
+<li>Set
+<ul>
+<li>HashSet: An unordered collection that rejects duplicates, and allows for efficient lookup of elements.</li>
+<li>TreeSet: A sorted set.</li>
+<li>EnumSet: A set of enumerated type values.</li>
+<li>LinkedHashSet: A set that remembers the order in which the elements were inserted.</li>
+</ul>
+</li>
 </ol>
 <h1>Collection interface</h1>
 <ol>
@@ -219,6 +222,11 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 &lt;<span class="pl-smi">T</span>&gt; <span class="pl-smi">T</span>[] <span class="pl-en">toArray</span>(<span class="pl-smi">T</span>[] <span class="pl-s1">a</span>)
 <span class="pl-k">default</span> &lt;<span class="pl-smi">T</span>&gt; <span class="pl-smi">T</span>[]
 <span class="pl-en">toArray</span>(<span class="pl-smi">IntFunction</span>&lt;<span class="pl-smi">T</span>[]&gt; <span class="pl-s1">generator</span>)</pre></div>
+<ol start="3">
+<li>AbstractCollection class是继承了Collection接口的一个抽象类，目的是为了减少重复代码书写，除了两个方法外其余的方法都有实现体，只要实现了这两个方法那么AbstractCollection类就可以帮你推导并实现其他方法。</li>
+</ol>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">public</span> <span class="pl-k">abstract</span> <span class="pl-smi">Iterator</span>&lt;<span class="pl-smi">E</span>&gt; <span class="pl-en">iterator</span>();
+<span class="pl-k">public</span> <span class="pl-k">abstract</span> <span class="pl-smi">int</span> <span class="pl-en">size</span>();</pre></div>
 <h1>Interator interface</h1>
 <div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">public</span> <span class="pl-k">interface</span> <span class="pl-smi">Iterator</span>&lt;<span class="pl-smi">E</span>&gt;
     {
@@ -238,13 +246,13 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         <span class="pl-smi">String</span> <span class="pl-s1">element</span> = <span class="pl-s1">iter</span>.<span class="pl-en">next</span>();
         <span class="pl-k">do</span> <span class="pl-smi">something</span> <span class="pl-s1">with</span> <span class="pl-s1">element</span>;
 }</pre></div>
-<ol>
+<ol start="2">
 <li>也可以使用for-each loop实现,因为for-each loop实现了Interator接口，而Collection接口extends了Interator接口，因此，任何实现了Collection接口的都可以直接用在for-each中。</li>
 </ol>
 <div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">for</span> (<span class="pl-smi">String</span> <span class="pl-s1">element</span> : <span class="pl-s1">coll</span> ) {
     <span class="pl-k">do</span> <span class="pl-smi">something</span> <span class="pl-s1">with</span> <span class="pl-s1">element</span>;
 }</pre></div>
-<ol>
+<ol start="3">
 <li>一开始，迭代器会生成在第一个元素左边，使用next方法后迭代器会跳转到第二个元素左边的空隙中，然后会返回第一个元素的引用。</li>
 <li>有两个方法分别是
 <ul>
@@ -252,7 +260,6 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </ul>
 <div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-c">// 假设这是你的集合</span>
 <span class="pl-smi">ArrayList</span>&lt;<span class="pl-smi">Integer</span>&gt; <span class="pl-s1">coll</span> = <span class="pl-k">new</span> <span class="pl-smi">ArrayList</span>&lt;&gt;(); 
-<span class="pl-c">// 【解答】</span>
 <span class="pl-s1">coll</span>.<span class="pl-en">forEach</span>(<span class="pl-s1">element</span> -&gt; <span class="pl-smi">System</span>.<span class="pl-s1">out</span>.<span class="pl-en">println</span>(<span class="pl-s1">element</span>));</pre></div>
 <ul>
 <li>Interator类的<code class="notranslate">forEachRemaining</code>：只对迭代器还没访问完的，剩下的元素遍历。</li>
@@ -269,33 +276,6 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </ol>
 <div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-smi">boolean</span> <span class="pl-en">remove</span>(<span class="pl-smi">int</span> <span class="pl-s1">index</span>)
 <span class="pl-smi">boolean</span> <span class="pl-en">remove</span>(<span class="pl-smi">Object</span> <span class="pl-s1">o</span>)</pre></div>
-<h1>Collection interface中常用的实现类</h1>
-<ol>
-<li>List
-<ul>
-<li>ArrayList: An indexed sequence that grows and shrinks dynamically.</li>
-<li>LinkedList: An ordered sequence that allows efficient insertion and removal at any location.</li>
-</ul>
-</li>
-<li>Deque
-<ul>
-<li>ArrayDeque: A double-ended queue that is implemented as a circular array.</li>
-</ul>
-</li>
-<li>Queue
-<ul>
-<li>PriorityQueue: A collection that allows efficient removal of the smallest element.</li>
-</ul>
-</li>
-<li>Set
-<ul>
-<li>HashSet: An unordered collection that rejects duplicates, and allows for efficient lookup of elements.</li>
-<li>TreeSet: A sorted set.</li>
-<li>EnumSet: A set of enumerated type values.</li>
-<li>LinkedHashSet: A set that remembers the order in which the elements were inserted.</li>
-</ul>
-</li>
-</ol>
 <h1>ListIterator interface</h1>
 <ol>
 <li>add方法修改内容后新的内容会放在ListIterator左边。ListIterator光标如果没有其他移动永远放在一开始List的左边的位置。</li>
@@ -307,7 +287,179 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li>有两个方法，和next()使用类似。</li>
 </ol>
 <div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-smi">boolean</span> <span class="pl-en">hasprevious</span>()
-<span class="pl-smi">E</span> <span class="pl-en">previous</span>()</pre></div></div>
+<span class="pl-smi">E</span> <span class="pl-en">previous</span>()</pre></div>
+<ol start="3">
+<li>ListIterator可以使用方法在一开始就规定光标在哪里，Iterator不行。</li>
+</ol>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-c">// 直接指定光标在 index 3 的位置 “A B C | D”</span>
+<span class="pl-smi">ListIterator</span>&lt;<span class="pl-smi">E</span>&gt; <span class="pl-s1">it</span> = <span class="pl-s1">list</span>.<span class="pl-en">listIterator</span>(<span class="pl-c1">3</span>);</pre></div>
+<h1>Queue and Deque</h1>
+<ol>
+<li>这两个接口均不支持在中间添加或者删除元素，因此不支持random access。</li>
+</ol>
+<h2>Queue interface</h2>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-c">// 往queue的末尾添加元素，如果queue满了，add方法抛出IllegalStateException异常，offer方法返回false。</span>
+<span class="pl-smi">boolean</span> <span class="pl-en">add</span>(<span class="pl-smi">E</span> <span class="pl-s1">e</span>);
+<span class="pl-smi">boolean</span> <span class="pl-en">offer</span>(<span class="pl-smi">E</span> <span class="pl-s1">e</span>);
+
+<span class="pl-c">// 移除queue第一个元素，如果queue为空，remove方法抛出NoSuchElementException异常,poll方法返回null。</span>
+<span class="pl-smi">E</span> <span class="pl-en">remove</span>();
+<span class="pl-smi">E</span> <span class="pl-en">poll</span>();
+
+<span class="pl-c">// 查看queue第一个元素,如果queue为空，，element方法抛出NoSuchElementException异常，peek方法返回null。</span>
+<span class="pl-smi">E</span> <span class="pl-en">element</span>();
+<span class="pl-smi">E</span> <span class="pl-en">peek</span>();</pre></div>
+<h2>Deque interface</h2>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-c">// 往这个Deque添加第一个元素前或者最后一个元素，如果Deque满了，返回false。</span>
+<span class="pl-smi">boolean</span> <span class="pl-en">offerFirst</span>(<span class="pl-smi">E</span> <span class="pl-s1">element</span>);
+<span class="pl-smi">boolean</span> <span class="pl-en">offerLast</span>(<span class="pl-smi">E</span> <span class="pl-s1">element</span>);
+
+<span class="pl-c">// 移除并且返回第一个元素或者最后一个元素，如果Deque是空的，返回null。</span>
+<span class="pl-smi">E</span> <span class="pl-en">pollFirst</span>();
+<span class="pl-smi">E</span> <span class="pl-en">pollLast</span>();
+
+<span class="pl-c">// 返回这个Deque的第一个元素或者最后一个元素，如果Deque是空的，返回null。</span>
+<span class="pl-smi">E</span> <span class="pl-en">peekFirst</span>();
+<span class="pl-smi">E</span> <span class="pl-en">peekLast</span>();</pre></div>
+<h2>ArrayDeque class</h2>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-c">// 构建一个初始容量为16的无界Deque</span>
+<span class="pl-en">ArrayDeque</span>() 
+
+<span class="pl-c">// 构建一个指定的初始容量的无界Deque</span>
+<span class="pl-en">ArrayDeque</span>(<span class="pl-smi">int</span> <span class="pl-s1">initialCapacity</span>) </pre></div>
+<h1>PriorityQueue interface</h1>
+<ol>
+<li>允许无论任何顺序(正序还是倒叙或者无顺序)的数据进入到priorityQueue中，但是当使用remove这样的方法的时候也就是要里面的数据，priorityQueue只会给你优先级最高的。这里优先级最高的意思就是最小的意思。</li>
+<li>但是不能插入/移除priorityQueue内部某个地方，因为内部没有index之类的东西，所以内部是不会排序的，只能保证heap top也就是马上要弹出的是优先级最高的那个。</li>
+<li>内部heap是一个二叉树结构，每当add或者remove的时候会自发的把优先级最高的元素顶到树的顶点。性能最高。</li>
+<li>要么实现Comparable接口，要么实现Comparator接口。
+<ul>
+<li>Comparable接口需要你的数据拥有一个自带的规则，比如int从小到大，String会按照字典顺序首字母排序。</li>
+<li>Comparator接口需要你自己创建规则。</li>
+</ul>
+</li>
+</ol>
+<h1>SequencedCollection interface</h1>
+<ol>
+<li>有以下方法</li>
+</ol>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-c">// 往这个collection的第一个元素前或者最后一个元素后添加元素，如果collection满了，抛出IllegalStateException异常。</span>
+<span class="pl-smi">void</span> <span class="pl-en">addFirst</span>(<span class="pl-smi">E</span> <span class="pl-s1">element</span>);
+<span class="pl-smi">void</span> <span class="pl-en">addLast</span>(<span class="pl-smi">E</span> <span class="pl-s1">element</span>);
+
+<span class="pl-c">// 移除这个collection的第一个元素或者最后一个元素，如果collection为空，抛出NoSuchElementException异常。</span>
+<span class="pl-smi">E</span> <span class="pl-en">removeFirst</span>();
+<span class="pl-smi">E</span> <span class="pl-en">removeLast</span>();
+
+<span class="pl-c">// 返回这个collection的第一个元素或者最后一个元素，如果这个collection为空，抛出NoSuchElementException异常。</span>
+<span class="pl-smi">E</span> <span class="pl-en">getFirst</span>();
+<span class="pl-smi">E</span> <span class="pl-en">getLast</span>();</pre></div>
+<h1>Hash Table</h1>
+<ol>
+<li>为了找到一个对象在表里的物理位置，哈希表会先计算这个对象的 hash code（哈希码），然后用它对桶的总数（也就是数组的长度）进行取模运算（求余数 %）。计算出来的余数就是该对象应该存放的桶的索引（Index）。如果一个对象的哈希码是 72268，现在表里有 128 个桶，那么它应该去几号桶？用数学算一下：72268/128 = 564.....76。所以这个对象会被精准投放到 76 号桶。</li>
+<li>如果这个bucket里面是空的，直接放进入。如果这个bucket里面不是空的，就使用equal方法挨个对比，看看我们要插入的这个元素是不是已经存在于这个桶里了（因为哈希表不允许重复）。</li>
+<li>如果哈希表装得太满，桶里的元素就会堆积，导致冲突越来越严重，查起来越来越慢。这时候它就需要彻底翻新，这个过程叫 Rehash（重新哈希）。哈希表会创建一个拥有更多桶的新数组，把老数组里的所有老员工重新计算余数、重新塞进新表里，最后把旧表直接扔掉。</li>
+<li>在 Java 中，控制什么时候开始翻新的指标叫加载因子（Load Factor）。Java 的默认值是 0.75。这意味着，当哈希表被装满了 75% 以上时（比如 100 个格子用了 75 个），Java 就会自动触发 Rehash。扩容时，新表的桶的数量通常是老表的两倍（用两倍多的座位来确保未来不容易冲突）。</li>
+</ol>
+<h1>Set interface</h1>
+<h2>HashSet class</h2>
+<ol>
+<li>Set里不允许有重复的元素，当我们使用add方法的时候，它会优先找存不存在，如果不存在才会塞进去。</li>
+<li>惊人的单桶查找（Fast Look-up）：它的 contains(Object o) 方法之所以快到极致（接近 O(1) 时间复杂度），是因为它绝对不会去遍历整个集合。它拿着你要找的元素，通过哈希公式一算，直接“精准空降”到那一个特定的桶（Bucket）里。如果那个桶里没有，它就立马告诉你“没有”，根本不需要看其他的桶。</li>
+<li>如果使用Iterator去遍历hashSet，会发现顺序是混乱的，因为哈希表为了防止冲突，会把元素均匀地散射（Scatter）在不同的桶里。迭代器在遍历时，是按照桶的物理编号（0号桶、1号桶、2号桶……）挨个过去看的。由于元素在桶里的排布本来就是乱的，所以数出来的顺序自然也是乱的。</li>
+<li>对于一个对象元素存入hashSet中的，切记不能修改这个元素的某些可能会影响hashcode的内容，因为如果修改了会导致这个元素的hashCode改变，单桶查询会根据新的hashCode查询，但是数据还是存在原本的旧桶里面，就会导致找不到要的。</li>
+</ol>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-c">// 构建一个空的hashSet</span>
+<span class="pl-en">HashSet</span>()
+
+<span class="pl-c">// 构建一个hashSet并且往这个hashSet中加入指定的collection。</span>
+<span class="pl-en">HashSet</span>(<span class="pl-smi">Collection</span>&lt;? <span class="pl-k">extends</span> <span class="pl-smi">E</span>&gt; <span class="pl-s1">elements</span>) 
+
+<span class="pl-c">// 可以构建一个设定的初始容量的hashSet，loadFactor也可以设置，loadFactor默认是0.75，如果hashSet的元素数量也就是size和capacity的比值超过了load factor，那么就会扩容。</span>
+<span class="pl-en">HashSet</span>(<span class="pl-smi">int</span> <span class="pl-s1">initialCapacity</span>)
+<span class="pl-s1">HashSet</span>(<span class="pl-smi">int</span> <span class="pl-s1">initialCapacity</span>, <span class="pl-smi">float</span> <span class="pl-s1">loadFactor</span>)
+
+<span class="pl-c">// numMappings为你的元素数量，如果你知道会有多少个元素，就可以用这个。</span>
+<span class="pl-k">static</span> &lt;<span class="pl-smi">E</span>&gt; <span class="pl-smi">HashSet</span>&lt;<span class="pl-smi">E</span>&gt; <span class="pl-en">newHashSet</span>(<span class="pl-smi">int</span> <span class="pl-s1">numMappings</span>)</pre></div>
+<h2>TreeSet class</h2>
+<ol>
+<li>TreeSet class对于传入的元素不需要规定其是否一定需要按照某个顺序，但是当我们遍历TreeSet里的时候，会自动按照初始规则排序。这是和hashSet不同的地方。</li>
+<li>内部数据结构是<code class="notranslate">red-black tree</code>，这个数据结构意味着当你放入一个元素的时候会自动排列将这个元素放入到规则要求的位置。</li>
+<li>红黑树比hash table要慢，但是比array和链表要快。</li>
+<li>和PriorityQueue interface类似，其可以通过自定义规则来排序使其遍历的时候按照你的规则。</li>
+</ol>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-c">// 创建一个空的treeset</span>
+<span class="pl-en">TreeSet</span>()
+<span class="pl-c">// 创建一个空的treeset，并且把自己写的规则放进去。</span>
+<span class="pl-en">TreeSet</span>(<span class="pl-smi">Comparator</span>&lt;? <span class="pl-en">super</span> <span class="pl-smi">E</span>&gt; <span class="pl-s1">comparator</span>)
+<span class="pl-c">// 创建一个空的treeset，并且把指定的collection放进去。 </span>
+<span class="pl-en">TreeSet</span>(<span class="pl-smi">Collection</span>&lt;? <span class="pl-k">extends</span> <span class="pl-smi">E</span>&gt; <span class="pl-s1">elements</span>)
+<span class="pl-c">// 创建一个空的treeset，但是会继承s的排序规则。</span>
+<span class="pl-en">TreeSet</span>(<span class="pl-s1">SortedSet</span>&lt;<span class="pl-s1">E</span>&gt; <span class="pl-s1">s</span>) </pre></div>
+<h2>SortedSet interface</h2>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-c">// 可以自定义比较器，和treeset配合使用，如果依靠默认的比较器，返回null</span>
+<span class="pl-smi">Comparator</span>&lt;? <span class="pl-en">super</span> <span class="pl-smi">E</span>&gt; <span class="pl-en">comparator</span>()
+<span class="pl-c">// 情况 A：使用自然排序（不传比较器）</span>
+        <span class="pl-smi">SortedSet</span>&lt;<span class="pl-smi">Integer</span>&gt; <span class="pl-s1">setA</span> = <span class="pl-k">new</span> <span class="pl-smi">TreeSet</span>&lt;&gt;();
+        <span class="pl-s1">setA</span>.<span class="pl-en">add</span>(<span class="pl-c1">10</span>);
+        
+        <span class="pl-c">// 技术行为：因为靠 Integer 自己的 compareTo 排序，所以返回 null</span>
+        <span class="pl-smi">System</span>.<span class="pl-s1">out</span>.<span class="pl-en">println</span>(<span class="pl-s1">setA</span>.<span class="pl-en">comparator</span>()); <span class="pl-c">// 输出: null</span>
+
+
+        <span class="pl-c">// 情况 B：传入定制的自定义比较器（降序排列）</span>
+        <span class="pl-smi">Comparator</span>&lt;<span class="pl-smi">Integer</span>&gt; <span class="pl-s1">descOrder</span> = (<span class="pl-s1">num1</span>, <span class="pl-s1">num2</span>) -&gt; <span class="pl-smi">Integer</span>.<span class="pl-en">compare</span>(<span class="pl-s1">num2</span>, <span class="pl-s1">num1</span>);
+        <span class="pl-smi">SortedSet</span>&lt;<span class="pl-smi">Integer</span>&gt; <span class="pl-s1">setB</span> = <span class="pl-k">new</span> <span class="pl-smi">TreeSet</span>&lt;&gt;(<span class="pl-s1">descOrder</span>);
+        <span class="pl-s1">setB</span>.<span class="pl-en">add</span>(<span class="pl-c1">10</span>);
+        
+        <span class="pl-c">// 技术行为：因为使用了定制规则，所以返回对应的比较器对象实例</span>
+        <span class="pl-smi">System</span>.<span class="pl-s1">out</span>.<span class="pl-en">println</span>(<span class="pl-s1">setB</span>.<span class="pl-en">comparator</span>()); </pre></div>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-c">// 获取sorted set中第一个，如果没有则抛出NoSuchElementException异常。</span>
+<span class="pl-smi">E</span> <span class="pl-en">first</span>();
+<span class="pl-c">// 获取sorted set中最后一个，如果没有则抛出NoSuchElementException异常。</span>
+<span class="pl-smi">E</span> <span class="pl-en">last</span>();</pre></div>
+<h2>NavigableSet interface</h2>
+<ol>
+<li>这个类是SortedSet interface的子类。</li>
+</ol>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-c">// 返回小于value的最大元素,没有就返回null</span>
+<span class="pl-smi">E</span> <span class="pl-en">higher</span>(<span class="pl-smi">E</span> <span class="pl-s1">value</span>); 
+<span class="pl-c">// 返回大于value的最小元素,没有就返回null</span>
+<span class="pl-smi">E</span> <span class="pl-en">lower</span>(<span class="pl-smi">E</span> <span class="pl-s1">value</span>);
+
+<span class="pl-c">// 返回小于等于value的最大元素，没有就返回null</span>
+<span class="pl-smi">E</span> <span class="pl-en">ceiling</span>(<span class="pl-smi">E</span> <span class="pl-s1">value</span>); 
+<span class="pl-c">// 返回大于等于value的最小元素，没有就返回null</span>
+<span class="pl-smi">E</span> <span class="pl-en">floor</span>(<span class="pl-smi">E</span> <span class="pl-s1">value</span>);
+
+<span class="pl-c">// 移除set中最左边的元素，如果没有则返回null</span>
+<span class="pl-smi">E</span> <span class="pl-en">pollFirst</span>(); 
+<span class="pl-c">// 移除set中最右边的元素，如果没有则返回null</span>
+<span class="pl-smi">E</span> <span class="pl-en">pollLast</span>();</pre></div>
+<h1>Map interface</h1>
+<ol>
+<li>在Map中，一个key只能对应一个value。</li>
+<li>Collection Type：
+<ul>
+<li>HashMap：使用hash table</li>
+<li>TreeMap：使用红黑树</li>
+<li>EnumMap：这里的key都是enum里的内容。</li>
+<li>LinkedHashMap：hashMap+双向链表。这里和hashMap的区别就是hashMap是乱序的，但是这里由于双向链表顺序就是和你传入的顺序一致。</li>
+<li>WeakHashMap：一般来说hashMap不消失，那么就算key是null，GC回收机制也不会回收。但是如果使用weakHashMap的话，一旦key为null或者不用了，那么GC会直接抹除这个key。</li>
+<li>IdentityHashMap：当比较两个key的时候，使用<code class="notranslate">==</code>这个符号而不是equal方法，只比较这两个key的在内存中的绝对地址。</li>
+</ul>
+</li>
+<li>map里的针对的都是key，不会对value进行针对。一般来说hash是最快的，除非你有顺序排序需求。</li>
+<li>如果使用<code class="notranslate">get(key)</code>后，key是不存在的，那么就会返回null。</li>
+<li>使用<code class="notranslate">getOrDefault()</code>方法当key不存在的时候，返回自己设定的值。</li>
+</ol>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-c">// 如果studetntUid不存在，则返回0</span>
+<span class="pl-smi">int</span> <span class="pl-s1">score</span> = <span class="pl-s1">scores</span>.<span class="pl-en">getOrDefault</span>(<span class="pl-s1">studentUid</span>, <span class="pl-c1">0</span>);</pre></div>
+<ol start="6">
+<li>使用<code class="notranslate">put(key, value)</code>方法后，会返回被替换前的old value。如果之前没有任何绑定过的value那么就返回null。</li>
+<li><code class="notranslate">remove(key)</code>方法会删除key及其对应的value，并且返回被删除的value。如果key不存在就返回null。</li>
+<li><code class="notranslate">size()</code>这个方法会返回目前在Map中的所有key-value，一个key-value就返回1，两个key-value就返回2。</li>
+</ol></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
