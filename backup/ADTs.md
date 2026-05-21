@@ -287,3 +287,166 @@ int score = scores.getOrDefault(studentUid, 0);
 6. 使用`put(key, value)`方法后，会返回被替换前的old value。如果之前没有任何绑定过的value那么就返回null。
 7. `remove(key)`方法会删除key及其对应的value，并且返回被删除的value。如果key不存在就返回null。
 8. `size()`这个方法会返回目前在Map中的所有key-value，一个key-value就返回1，两个key-value就返回2。
+9. 更新一个key对应的value的时候可以使用三种方法。
+```java
+counts.put(word, counts.getOrDefault(word, 0) + 1)
+
+// 如果word不存在，设定为1，如果存在，执行sum方法+1
+counts.merge(word, 1, Integer::sum);
+
+// 如果word不存在，设定为0;如果存在，不变
+counts.putIfAbsent(word, 0);
+counts.put(word, counts.get(word) + 1); // 此时我们确信 get 一定能成功
+```
+10. 在一个 Map 里面嵌套一个集合（Set），也就是建立“一对多”的映射关系。
+```java
+Map<String,TreeSet<Integer>> bookIndex = new TreeMap<String, TreeSet<Integer>>();
+// 当term这个key存在，就返回之前的treeset，并且执行add方法。
+// 当term这个key不存在，会创建一个treeset加入到value中，并且执行add方法。
+bookIndex.computeIfAbsent(term, _ -> new TreeSet<>()).add(pageNumber);
+```
+11. 由于Map没有实现Iterable接口，所以不能获取到Iterator。但是可以获得这个Map的视图，可以获得下面的view。
+```java
+// 所有key装在Set中，这里的keySet()返回的是一个view。我们不能直接对这个keys进行add或者remove操作，只能通过获得一个属于keys的Iterator来进行remove操作，一旦删除会直接删除一个key-value。
+Set<K> keySet();
+Set<String> keys = map.keySet();
+for (String key : keys)
+
+// 所有value装在Collection中
+Collection<V> values();
+// 所有key-value pair装在Set中,这里的entrySet是一个实现了Map.Entry接口的类的对象。
+Set<Map.Entry<K, V>> entrySet();
+for (Map.Entry<String, Integer> entry : counts.entrySet()) {
+    String k = entry.getKey(); 
+    Integer v = entry.getValue();
+    entry.setValue(v + 1); // same as counts.put(k, v + 1)
+}
+```
+12. 有下面方法
+```java
+// 获得key对应的value，如果key不存在，返回null
+V get(Object key)
+
+default V getOrDefault(Object key, V defaultValue)
+V put(K key, V value)
+
+// 把entries里的key-value放入到目前的map中
+void putAll(Map<? extends K, ? extends V> entries)
+
+// 如果key存在返回true
+boolean containsKey(Object key) 
+boolean containsValue(Object value) 
+
+// 使用action这个lambda行为对所有key和value进行操作
+default void forEach(BiConsumer<? super K,? super V> action)
+
+// 当key不存在的时候，把key-value存进map中；如果key存在，则把旧value和新value放入后面的remappingFunction中计算：
+// 如果remappingFunction的结果返回不是null，则更新用新value覆盖旧value,并返回更新后的value。
+// 如果remappingFunction的结果返回的是null，则删除这个key
+default V merge(K key, V value, BiFunction<? super V,? super V,? extends V> remappingFunction)
+
+// 如果key不存在，则在这里使用null传给后面的remappingFunction进行操作
+// 如果key存在，就把key传给后面的remappingFunction进行操作
+// 如果后面的remappingFunction返回的是null，并且key存在，那就remove这个key；如果key不存在就什么都不做
+// 如果后面的remappingFunction返回的是非null，则把新value和key绑定，并get(key)
+default V compute(K key, BiFunction<? super K,? super V,? extends V> remappingFunction)
+// 如果key为非null，也就是存在那就传入后面remappingFunction操作
+default V computeIfPresent(K key, BiFunction<? super K,? super V,? extends V> remappingFunction)
+// 如果key为null，也就是不存在就传入后面remappingFunction操作
+default V computeIfAbsent(K key, Function<? super K,? extends V> mappingFunction)
+
+// 对map中的所有key的value进行操作，并根据这个function返回并覆盖旧的value到map中。
+default void replaceAll(BiFunction<? super K,? super V,? extends V> function)
+
+// 如果key不存在，把这里的key和value存入map中，如果key存在，什么都不发生，并返回旧的value值。
+default V putIfAbsent(K key, V value)
+```
+
+## HashMap class
+1. 有下面方法
+```java
+HashMap()
+HashMap(int initialCapacity)
+// default load factor是0.75，如果自己设定是0.0-1.0
+HashMap(int initialCapacity, float loadFactor)
+// 如果已经知道自己会存放去map中，用这个方法可以阻止当最大值/目前内容的比值达到设定的load factor的时候产生的rehashing行为。
+static <K, V> HashMap<K, V> newHashMap(int numMappings)
+```
+
+## TreeMap class
+1. 有下面方法
+```java
+// 为实现了Comparable接口的keys创建一个tree map。
+TreeMap() 
+// 构建一个实现了准确的Comparator规则的tree map。
+TreeMap(Comparator<? super K> c)
+// 创建一个tree map，并且把所有entries这个map的内容塞进tree map中。
+TreeMap(Map<? extends K, ? extends V> entries) 
+// 如果有一个排序号的SortedMap内容，可以把内容以及这个的顺序一起复制到Tree map中。
+TreeMap(SortedMap<? extends K, ? extends V> entries)
+```
+
+## SortedMap interface
+1. 有下面方法
+```java
+// 返回这个Map的排序方法，如果使用默认的排序没有传入自定义的排序就返回null，如果是自定义的排序就传回自定义排序。
+Comparator<? super K> comparator()
+// 返回最左边的key
+K firstKey(); 
+// 返回最右边的key
+K lastKey()；
+```
+
+# Collections工具类
+1. sort
+```java
+// 通过对collection进行排列，这里的collection必须重写Comparable的compareTo方法，或者在里面塞入Comparable对象也就是排序规则。
+Collections.sort(collection)
+```
+2. binarySearch。通过先比较中间值和target。这里的算法默认是从小到大，如果想要让算法认为这个是从大到小必须传入一个comparator告诉算法。
+```java
+// 这里的elments必须实现List<E> interface,同时E是Comparable的也就是排好序的。
+// 如果找到了target会返回目标所在这个elements里的index，是大于等于0的；如果不存在，不仅返回-1，还返回-i-1，这里的i表示target应该插入到elements的位置。
+int Collections.binarySearch(elements, target);
+// 也可以传入一个规则
+int Collections.binarySearch(elements, target, comparator);
+```
+3. 有下面几种方法
+```java
+static <T extends Comparable<? super T>> T min(Collection<T> elements)
+static <T extends Comparable<? super T>> T max(Collection<T> elements)
+static <T> min(Collection<T> elements, Comparator<? super T> c)
+static <T> max(Collection<T> elements, Comparator<? super T> c)
+// 把List from里的元素放入到List to里，并且原来在from里是什么位置，在to里也是什么位置。并且to的大小一定必须大于等于from的大小。
+static <T> void copy(List<? super T> to, List<T> from)
+// 把List L里的所有元素变为传入参数value。
+static <T> void fill(List<? super T> l, T value)
+// 把一个或多个value存入List c后面，values可以是一组内容也可以是数组。
+static <T> boolean addAll(Collection<? super T> c, T... values)
+// 把List l的old value全部替换为new value。
+static <T> boolean replaceAll(List<T> l, T oldValue, T newValue)
+// l是大List，s是小List，查看s在l中第一次出现的index位置。顺序必须完全一致。
+static int indexOfSubList(List<?> l, List<?> s)
+// l中s最后一次出现的index位置。
+static int lastIndexOfSubList(List<?> l, List<?> s)
+// 把index i位置的元素和index j位置的元素进行替换。
+static void swap(List<?> l, int i, int j) 
+// 把List l的元素排列颠倒。
+static void reverse(List<?> l)
+// List l里面的元素往右边移动d个位置。
+static void rotate(List<?> l, int d)
+// 返回Collection c里有多少个元素和o相等。
+static int frequency(Collection<?> c, Object o) 
+// 如果c1和c2有交集就返回true
+boolean disjoint(Collection<?> c1, Collection<?> c2) 
+```
+
+# Array与List之间的转换
+1. 使用List.of()方法可以把一个Array转换为List
+```java
+String[] names = . . .;
+List<String> staff = List.of(names)
+```
+1. 使用Collection interface自带的toArray()方法可以实现List转换到Array。
+
+
