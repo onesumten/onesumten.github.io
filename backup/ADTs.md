@@ -447,6 +447,6 @@ boolean disjoint(Collection<?> c1, Collection<?> c2)
 String[] names = . . .;
 List<String> staff = List.of(names)
 ```
-1. 使用Collection interface自带的toArray()方法可以实现List转换到Array。
+2. 使用Collection interface自带的toArray()方法可以实现List转换到Array。
 
 
