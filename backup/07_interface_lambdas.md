@@ -3,7 +3,7 @@
 2. 所有在interface中的method都必须声明为public，如果不是那就是default，并且无法正确被重写因为default意思是访问权限只允许在同一个package内。
 3. compareTo是一个abstract,任何实现了Comparable的类必须提供compareTo方法同时传入参数只能是Object，并且返回是int。在java5之后，
 Comparable接口被定义为Comparable<T>。
-```
+```java
 public interface Comparable {
     int compareTo(Object other);
 }
@@ -11,7 +11,7 @@ public interface Comparable {
 4. Arrays.sort()方法可以对object的array进行分类，从小到大，如果想对这个object的array使用这个sort方法那么这个object的类必须implement Comparable接口。
 如果Arrays.sort(Object[] o)只有一个数组内容,此时sort会强制把o转换为comparable类型，调用它的comparTo方法。如果是**Arrays.sort(T[] a, Comparator<? super T> c)**这种情况就不需要重写，sort方法会根据第二个参数的排序规则排序。
 5. Interface可以拥有constant，当你写一个：
-```
+```java
 int VALUE = 10;
 ```
    * 这里VALUE会被定性为public static final，属于这个interface，同时不能再被修改了。
@@ -26,7 +26,7 @@ int VALUE = 10;
 
 # ActionListener interface
 1. 当一个class implements这个接口的时候，必须在这个class实现一个actionPerformed方法用来显示当botton被按下的时候会发生什么。
-```
+```java
 class TimePrinter implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         System.out.println("At the tone, the time is "
@@ -36,14 +36,14 @@ class TimePrinter implements ActionListener {
 }
 ```
 2. 随后创建一个对象：
-```
+```java
 var listener = new TimePrinter();
 Timer t = new Timer(1000, listener);
 t.start();
 ```
 # Comparator interface
 1. 使用这个接口可以同时写两种不同的比较方法在一个compare方法里。比如：
-```
+```java
 // 需求：按年龄升序排，如果年龄相同，按成绩降序排
 Comparator<Student> complexComparator = new Comparator<Student>() {
     @Override
@@ -68,7 +68,7 @@ Collections.sort(studentList, complexComparator);
 1. 这个接口称为标记接口，只有一个类在implements这个接口后才能表示拥有clone的能力，也就可以重写clone方法，并且一定要public方便在其他类中使用。
 2. Objetc.clone()是protected，而protected的规则是子类只能在子类内部使用父类的protected方法。如果一个在一个Main类中，Employee类的对象使用clone方法是会产生compliation error。
 3. 重写的clone方法需要实现deep copy,也就是说先shallow copy，然后再copy内容来达到deep copy。
-```
+```java
 public class Employee implements Cloneable {
     private String name;
     private Date hireDay;
@@ -90,19 +90,19 @@ public class Employee implements Cloneable {
 1. lambda必须对应一个functional interface which means it has one abstract method，但可以有多个default和static方法。
 2. 必须满足三个一致：参数数量一致；参数类型一致；返回类型一致。
 3. 如果lambda表达式的方法没有参数，比如roll()，那么仍然需要一个空号“()”，比如：
-```
+```java
 () -> { return 1 + (int)(Math.random() * 6); }
 ```
 4. 如果只有一个parameter且这个parameter可以被左边的进行推断，那么这个parameter可以不需要写类型，因为complier可以从左边的内容推断。
 5. 在lambda expression右边你不需要加上大括号，如果你加上大括号你就需要加上return，如果没有大括号就不能用return。
-```
+```java
 //不加大括号的
 (x) -> x * 2
 //加大括号的
 (x) -> { return x * 2; }
 ```
 6. 一个functional interface中的abstract method和java.lang.Objects类中的方法名字一样，那么这些方法不会被计入functional interface的abstract method。
-```
+```java
 @FunctionalInterface
 public interface MyInterface {
     // 真正的抽象方法（计数 +1）
@@ -119,7 +119,7 @@ public interface MyInterface {
     * 外层方法的局部变量 (local variables from the enclosing method): 比如代码中的 factor。
     * 实例变量 (instance variables): 属于类的成员变量。
     * 静态变量 (static variables): 属于类的静态成员。
-```
+```java
 int factor = 2;
 Function<Integer, Integer> multiply = x -> x * factor;
 ```
@@ -164,7 +164,7 @@ Function<Integer, Integer> multiply = x -> x * factor;
 
 # Anonymous inner class
 1. anonymous inner class不需要class名字，用来简化代码量。这里的ActionListerner是一个接口，创建了一个实现该接口的匿名子类实例。
-```
+```java
 public class MyTimerClass {
     
     // 这是一个成员方法
@@ -188,7 +188,7 @@ public class MyTimerClass {
 }
 ```
 1. 可以被定义在方法内部也可以在类内部作为一个field提供给这个类中其他方法进行使用
-```
+```java
 public class MyClass {
     // 这是一个在类内部、方法外部定义的匿名内部类
     // 它本质上是一个“成员变量”

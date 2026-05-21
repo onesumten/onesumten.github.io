@@ -19,7 +19,7 @@
 <meta property="og:url" content="https://onesumten.github.io/post/07_interface_lambdas.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/128906322?v=4&size=64">
 <title>07_interface_lambdas</title>
-
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
 
 
 </head>
@@ -92,17 +92,15 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li>compareTo是一个abstract,任何实现了Comparable的类必须提供compareTo方法同时传入参数只能是Object，并且返回是int。在java5之后，<br>
 Comparable接口被定义为Comparable。</li>
 </ol>
-<pre class="notranslate"><code class="notranslate">public interface Comparable {
-    int compareTo(Object other);
-}
-</code></pre>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">public</span> <span class="pl-k">interface</span> <span class="pl-smi">Comparable</span> {
+    <span class="pl-smi">int</span> <span class="pl-en">compareTo</span>(<span class="pl-smi">Object</span> <span class="pl-s1">other</span>);
+}</pre></div>
 <ol start="4">
 <li>Arrays.sort()方法可以对object的array进行分类，从小到大，如果想对这个object的array使用这个sort方法那么这个object的类必须implement Comparable接口。<br>
 如果Arrays.sort(Object[] o)只有一个数组内容,此时sort会强制把o转换为comparable类型，调用它的comparTo方法。如果是**Arrays.sort(T[] a, Comparator&lt;? super T&gt; c)**这种情况就不需要重写，sort方法会根据第二个参数的排序规则排序。</li>
 <li>Interface可以拥有constant，当你写一个：</li>
 </ol>
-<pre class="notranslate"><code class="notranslate">int VALUE = 10;
-</code></pre>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-smi">int</span> <span class="pl-c1">VALUE</span> = <span class="pl-c1">10</span>;</pre></div>
 <ul>
 <li>这里VALUE会被定性为public static final，属于这个interface，同时不能再被修改了。</li>
 </ul>
@@ -120,41 +118,38 @@ Comparable接口被定义为Comparable。</li>
 <ol>
 <li>当一个class implements这个接口的时候，必须在这个class实现一个actionPerformed方法用来显示当botton被按下的时候会发生什么。</li>
 </ol>
-<pre class="notranslate"><code class="notranslate">class TimePrinter implements ActionListener {
-    public void actionPerformed(ActionEvent event) {
-        System.out.println("At the tone, the time is "
-            + Instant.ofEpochMilli(event.getWhen()));
-        Toolkit.getDefaultToolkit().beep();
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">class</span> <span class="pl-smi">TimePrinter</span> <span class="pl-k">implements</span> <span class="pl-smi">ActionListener</span> {
+    <span class="pl-k">public</span> <span class="pl-smi">void</span> <span class="pl-en">actionPerformed</span>(<span class="pl-smi">ActionEvent</span> <span class="pl-s1">event</span>) {
+        <span class="pl-smi">System</span>.<span class="pl-s1">out</span>.<span class="pl-en">println</span>(<span class="pl-s">"At the tone, the time is "</span>
+            + <span class="pl-smi">Instant</span>.<span class="pl-en">ofEpochMilli</span>(<span class="pl-s1">event</span>.<span class="pl-en">getWhen</span>()));
+        <span class="pl-smi">Toolkit</span>.<span class="pl-en">getDefaultToolkit</span>().<span class="pl-en">beep</span>();
     }
-}
-</code></pre>
+}</pre></div>
 <ol start="2">
 <li>随后创建一个对象：</li>
 </ol>
-<pre class="notranslate"><code class="notranslate">var listener = new TimePrinter();
-Timer t = new Timer(1000, listener);
-t.start();
-</code></pre>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-smi">var</span> <span class="pl-s1">listener</span> = <span class="pl-k">new</span> <span class="pl-smi">TimePrinter</span>();
+<span class="pl-smi">Timer</span> <span class="pl-s1">t</span> = <span class="pl-k">new</span> <span class="pl-smi">Timer</span>(<span class="pl-c1">1000</span>, <span class="pl-s1">listener</span>);
+<span class="pl-s1">t</span>.<span class="pl-en">start</span>();</pre></div>
 <h1>Comparator interface</h1>
 <ol>
 <li>使用这个接口可以同时写两种不同的比较方法在一个compare方法里。比如：</li>
 </ol>
-<pre class="notranslate"><code class="notranslate">// 需求：按年龄升序排，如果年龄相同，按成绩降序排
-Comparator&lt;Student&gt; complexComparator = new Comparator&lt;Student&gt;() {
-    @Override
-    public int compare(Student s1, Student s2) {
-        // 规则 1: 年龄升序
-        if (s1.getAge() != s2.getAge()) {
-            return s1.getAge() - s2.getAge(); // 负数在前（小的在前）
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-c">// 需求：按年龄升序排，如果年龄相同，按成绩降序排</span>
+<span class="pl-smi">Comparator</span>&lt;<span class="pl-smi">Student</span>&gt; <span class="pl-s1">complexComparator</span> = <span class="pl-k">new</span> <span class="pl-smi">Comparator</span>&lt;<span class="pl-smi">Student</span>&gt;() {
+    <span class="pl-c1">@</span><span class="pl-c1">Override</span>
+    <span class="pl-k">public</span> <span class="pl-smi">int</span> <span class="pl-en">compare</span>(<span class="pl-smi">Student</span> <span class="pl-s1">s1</span>, <span class="pl-smi">Student</span> <span class="pl-s1">s2</span>) {
+        <span class="pl-c">// 规则 1: 年龄升序</span>
+        <span class="pl-k">if</span> (<span class="pl-s1">s1</span>.<span class="pl-en">getAge</span>() != <span class="pl-s1">s2</span>.<span class="pl-en">getAge</span>()) {
+            <span class="pl-k">return</span> <span class="pl-s1">s1</span>.<span class="pl-en">getAge</span>() - <span class="pl-s1">s2</span>.<span class="pl-en">getAge</span>(); <span class="pl-c">// 负数在前（小的在前）</span>
         }
-        // 规则 2: 年龄相同时，成绩降序
-        // 注意：double比较建议用 Double.compare
-        return Double.compare(s2.getScore(), s1.getScore()); // s2和s1调换位置实现降序
+        <span class="pl-c">// 规则 2: 年龄相同时，成绩降序</span>
+        <span class="pl-c">// 注意：double比较建议用 Double.compare</span>
+        <span class="pl-k">return</span> <span class="pl-smi">Double</span>.<span class="pl-en">compare</span>(<span class="pl-s1">s2</span>.<span class="pl-en">getScore</span>(), <span class="pl-s1">s1</span>.<span class="pl-en">getScore</span>()); <span class="pl-c">// s2和s1调换位置实现降序</span>
     }
 };
-//下面是使用方法，第一个参数是想要比较的内容，第二个参数是规则。
-Collections.sort(studentList, complexComparator);
-</code></pre>
+<span class="pl-c">//下面是使用方法，第一个参数是想要比较的内容，第二个参数是规则。</span>
+<span class="pl-smi">Collections</span>.<span class="pl-en">sort</span>(<span class="pl-s1">studentList</span>, <span class="pl-s1">complexComparator</span>);</pre></div>
 <ol>
 <li>reflexivity（自反性）
 <ul>
@@ -169,53 +164,49 @@ Collections.sort(studentList, complexComparator);
 <li>Objetc.clone()是protected，而protected的规则是子类只能在子类内部使用父类的protected方法。如果一个在一个Main类中，Employee类的对象使用clone方法是会产生compliation error。</li>
 <li>重写的clone方法需要实现deep copy,也就是说先shallow copy，然后再copy内容来达到deep copy。</li>
 </ol>
-<pre class="notranslate"><code class="notranslate">public class Employee implements Cloneable {
-    private String name;
-    private Date hireDay;
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">Employee</span> <span class="pl-k">implements</span> <span class="pl-smi">Cloneable</span> {
+    <span class="pl-k">private</span> <span class="pl-smi">String</span> <span class="pl-s1">name</span>;
+    <span class="pl-k">private</span> <span class="pl-smi">Date</span> <span class="pl-s1">hireDay</span>;
 
-    @Override
-    public Employee clone() throws CloneNotSupportedException {
-        // 1. 先执行默认的浅拷贝
-        Employee cloned = (Employee) super.clone();
+    <span class="pl-c1">@</span><span class="pl-c1">Override</span>
+    <span class="pl-k">public</span> <span class="pl-smi">Employee</span> <span class="pl-en">clone</span>() <span class="pl-k">throws</span> <span class="pl-smi">CloneNotSupportedException</span> {
+        <span class="pl-c">// 1. 先执行默认的浅拷贝</span>
+        <span class="pl-smi">Employee</span> <span class="pl-s1">cloned</span> = (<span class="pl-smi">Employee</span>) <span class="pl-en">super</span>.<span class="pl-en">clone</span>();
         
-        // 2. 为了防止共享 Date 对象，需要手动克隆可变对象（实现深拷贝）
-        // cloned.hireDay = (Date) hireDay.clone(); 
+        <span class="pl-c">// 2. 为了防止共享 Date 对象，需要手动克隆可变对象（实现深拷贝）</span>
+        <span class="pl-c">// cloned.hireDay = (Date) hireDay.clone(); </span>
         
-        return cloned;
+        <span class="pl-k">return</span> <span class="pl-s1">cloned</span>;
     }
-}
-</code></pre>
+}</pre></div>
 <h1>Lambda expression</h1>
 <ol>
 <li>lambda必须对应一个functional interface which means it has one abstract method，但可以有多个default和static方法。</li>
 <li>必须满足三个一致：参数数量一致；参数类型一致；返回类型一致。</li>
 <li>如果lambda表达式的方法没有参数，比如roll()，那么仍然需要一个空号“()”，比如：</li>
 </ol>
-<pre class="notranslate"><code class="notranslate">() -&gt; { return 1 + (int)(Math.random() * 6); }
-</code></pre>
+<div class="highlight highlight-source-java"><pre class="notranslate">() -&gt; { <span class="pl-k">return</span> <span class="pl-c1">1</span> + (<span class="pl-smi">int</span>)(<span class="pl-smi">Math</span>.<span class="pl-en">random</span>() * <span class="pl-c1">6</span>); }</pre></div>
 <ol start="4">
 <li>如果只有一个parameter且这个parameter可以被左边的进行推断，那么这个parameter可以不需要写类型，因为complier可以从左边的内容推断。</li>
 <li>在lambda expression右边你不需要加上大括号，如果你加上大括号你就需要加上return，如果没有大括号就不能用return。</li>
 </ol>
-<pre class="notranslate"><code class="notranslate">//不加大括号的
-(x) -&gt; x * 2
-//加大括号的
-(x) -&gt; { return x * 2; }
-</code></pre>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-c">//不加大括号的</span>
+(<span class="pl-s1">x</span>) -&gt; <span class="pl-s1">x</span> * <span class="pl-c1">2</span>
+<span class="pl-c">//加大括号的</span>
+(<span class="pl-s1">x</span>) -&gt; { <span class="pl-k">return</span> <span class="pl-s1">x</span> * <span class="pl-c1">2</span>; }</pre></div>
 <ol start="6">
 <li>一个functional interface中的abstract method和java.lang.Objects类中的方法名字一样，那么这些方法不会被计入functional interface的abstract method。</li>
 </ol>
-<pre class="notranslate"><code class="notranslate">@FunctionalInterface
-public interface MyInterface {
-    // 真正的抽象方法（计数 +1）
-    void execute();
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-c1">@</span><span class="pl-c1">FunctionalInterface</span>
+<span class="pl-k">public</span> <span class="pl-k">interface</span> <span class="pl-smi">MyInterface</span> {
+    <span class="pl-c">// 真正的抽象方法（计数 +1）</span>
+    <span class="pl-smi">void</span> <span class="pl-en">execute</span>();
 
-    // 以下方法虽然是抽象的，但覆盖了 Object 的方法（计数 +0）
-    boolean equals(Object obj);
-    String toString();
-    int hashCode();
-}
-</code></pre>
+    <span class="pl-c">// 以下方法虽然是抽象的，但覆盖了 Object 的方法（计数 +0）</span>
+    <span class="pl-smi">boolean</span> <span class="pl-en">equals</span>(<span class="pl-smi">Object</span> <span class="pl-s1">obj</span>);
+    <span class="pl-smi">String</span> <span class="pl-en">toString</span>();
+    <span class="pl-smi">int</span> <span class="pl-en">hashCode</span>();
+}</pre></div>
 <ol start="7">
 <li>lambda expression可以访问的四种变量
 <ul>
@@ -226,9 +217,8 @@ public interface MyInterface {
 </ul>
 </li>
 </ol>
-<pre class="notranslate"><code class="notranslate">int factor = 2;
-Function&lt;Integer, Integer&gt; multiply = x -&gt; x * factor;
-</code></pre>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-smi">int</span> <span class="pl-s1">factor</span> = <span class="pl-c1">2</span>;
+<span class="pl-smi">Function</span>&lt;<span class="pl-smi">Integer</span>, <span class="pl-smi">Integer</span>&gt; <span class="pl-s1">multiply</span> = <span class="pl-s1">x</span> -&gt; <span class="pl-s1">x</span> * <span class="pl-s1">factor</span>;</pre></div>
 <ol start="8">
 <li>在lambda expression内部，不能对local variable进行修改。因为local variable存储在stack中，当这个方法结束后，这个local variable将会消失；而lambda存储在heap中。</li>
 <li>instance and static variable可以被修改因为这两个内容存储在heap中。</li>
@@ -283,46 +273,44 @@ Function&lt;Integer, Integer&gt; multiply = x -&gt; x * factor;
 <ol>
 <li>anonymous inner class不需要class名字，用来简化代码量。这里的ActionListerner是一个接口，创建了一个实现该接口的匿名子类实例。</li>
 </ol>
-<pre class="notranslate"><code class="notranslate">public class MyTimerClass {
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyTimerClass</span> {
     
-    // 这是一个成员方法
-    public void start(int interval, boolean beep) {
+    <span class="pl-c">// 这是一个成员方法</span>
+    <span class="pl-k">public</span> <span class="pl-smi">void</span> <span class="pl-en">start</span>(<span class="pl-smi">int</span> <span class="pl-s1">interval</span>, <span class="pl-smi">boolean</span> <span class="pl-s1">beep</span>) {
         
-        // 1. 定义匿名内部类（并立刻实例化）
-        ActionListener listener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                System.out.println("Time is " + Instant.ofEpochMilli(event.getWhen()));
-                if (beep) {
-                    Toolkit.getDefaultToolkit().beep();
+        <span class="pl-c">// 1. 定义匿名内部类（并立刻实例化）</span>
+        <span class="pl-smi">ActionListener</span> <span class="pl-s1">listener</span> = <span class="pl-k">new</span> <span class="pl-smi">ActionListener</span>() {
+            <span class="pl-c1">@</span><span class="pl-c1">Override</span>
+            <span class="pl-k">public</span> <span class="pl-smi">void</span> <span class="pl-en">actionPerformed</span>(<span class="pl-smi">ActionEvent</span> <span class="pl-s1">event</span>) {
+                <span class="pl-smi">System</span>.<span class="pl-s1">out</span>.<span class="pl-en">println</span>(<span class="pl-s">"Time is "</span> + <span class="pl-smi">Instant</span>.<span class="pl-en">ofEpochMilli</span>(<span class="pl-s1">event</span>.<span class="pl-en">getWhen</span>()));
+                <span class="pl-k">if</span> (<span class="pl-s1">beep</span>) {
+                    <span class="pl-smi">Toolkit</span>.<span class="pl-en">getDefaultToolkit</span>().<span class="pl-en">beep</span>();
                 }
             }
         };
 
-        // 2. 使用这个实例
-        Timer timer = new Timer(interval, listener);
-        timer.start();
+        <span class="pl-c">// 2. 使用这个实例</span>
+        <span class="pl-smi">Timer</span> <span class="pl-s1">timer</span> = <span class="pl-k">new</span> <span class="pl-smi">Timer</span>(<span class="pl-s1">interval</span>, <span class="pl-s1">listener</span>);
+        <span class="pl-s1">timer</span>.<span class="pl-en">start</span>();
     }
-}
-</code></pre>
+}</pre></div>
 <ol>
 <li>可以被定义在方法内部也可以在类内部作为一个field提供给这个类中其他方法进行使用</li>
 </ol>
-<pre class="notranslate"><code class="notranslate">public class MyClass {
-    // 这是一个在类内部、方法外部定义的匿名内部类
-    // 它本质上是一个“成员变量”
-    private Comparator&lt;String&gt; stringComparator = new Comparator&lt;String&gt;() {
-        @Override
-        public int compare(String s1, String s2) {
-            return s1.length() - s2.length();
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyClass</span> {
+    <span class="pl-c">// 这是一个在类内部、方法外部定义的匿名内部类</span>
+    <span class="pl-c">// 它本质上是一个“成员变量”</span>
+    <span class="pl-k">private</span> <span class="pl-smi">Comparator</span>&lt;<span class="pl-smi">String</span>&gt; <span class="pl-s1">stringComparator</span> = <span class="pl-k">new</span> <span class="pl-smi">Comparator</span>&lt;<span class="pl-smi">String</span>&gt;() {
+        <span class="pl-c1">@</span><span class="pl-c1">Override</span>
+        <span class="pl-k">public</span> <span class="pl-smi">int</span> <span class="pl-en">compare</span>(<span class="pl-smi">String</span> <span class="pl-s1">s1</span>, <span class="pl-smi">String</span> <span class="pl-s1">s2</span>) {
+            <span class="pl-k">return</span> <span class="pl-s1">s1</span>.<span class="pl-en">length</span>() - <span class="pl-s1">s2</span>.<span class="pl-en">length</span>();
         }
     };
 
-    public void useComparator() {
-        // 在这里可以使用上面定义好的 stringComparator
+    <span class="pl-k">public</span> <span class="pl-smi">void</span> <span class="pl-en">useComparator</span>() {
+        <span class="pl-c">// 在这里可以使用上面定义好的 stringComparator</span>
     }
-}
-</code></pre></div>
+}</pre></div></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
