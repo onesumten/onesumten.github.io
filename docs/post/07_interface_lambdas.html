@@ -222,7 +222,14 @@ Comparable接口被定义为Comparable。</li>
 <ol start="8">
 <li>在lambda expression内部，不能对local variable进行修改。因为local variable存储在stack中，当这个方法结束后，这个local variable将会消失；而lambda存储在heap中。</li>
 <li>instance and static variable可以被修改因为这两个内容存储在heap中。</li>
+<li>lambda的根据结果排序，右边规则的结果如果为负数，第一个参数永远排在前面，右边规则的结果如果为正数，第二个参数永远排在前面。</li>
 </ol>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-c">// 当a-b为负数时，a排在b前面，当a-b为正数时，b排在a前面</span>
+(<span class="pl-s1">a</span>,<span class="pl-s1">b</span>)-&gt;<span class="pl-s1">a</span>-<span class="pl-en">b</span>
+<span class="pl-c">// 当b-a为负数时，a排在前面，当b-a为正数时，b排在a前面</span>
+(<span class="pl-s1">a</span>,<span class="pl-s1">b</span>)-&gt;<span class="pl-s1">b</span>-<span class="pl-en">a</span>
+<span class="pl-c">// 当a-b为负数时，b排在前面，当b-a为正数时，a排在b前面</span>
+(<span class="pl-s1">b</span>,<span class="pl-s1">a</span>)-&gt;<span class="pl-s1">a</span>-<span class="pl-s1">b</span></pre></div>
 <h1>Function&lt;T, R&gt;</h1>
 <ol>
 <li>R apply(T t)，这个apply方法的目的是激活的作用，如果我们有一个lambda对象是add，那么通过add.apply(x)来激活add对象。</li>
@@ -294,7 +301,7 @@ Comparable接口被定义为Comparable。</li>
         <span class="pl-s1">timer</span>.<span class="pl-en">start</span>();
     }
 }</pre></div>
-<ol>
+<ol start="2">
 <li>可以被定义在方法内部也可以在类内部作为一个field提供给这个类中其他方法进行使用</li>
 </ol>
 <div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyClass</span> {

@@ -125,7 +125,15 @@ Function<Integer, Integer> multiply = x -> x * factor;
 ```
 8. 在lambda expression内部，不能对local variable进行修改。因为local variable存储在stack中，当这个方法结束后，这个local variable将会消失；而lambda存储在heap中。
 9. instance and static variable可以被修改因为这两个内容存储在heap中。
-
+10. lambda的根据结果排序，右边规则的结果如果为负数，第一个参数永远排在前面，右边规则的结果如果为正数，第二个参数永远排在前面。
+```java
+// 当a-b为负数时，a排在b前面，当a-b为正数时，b排在a前面
+(a,b)->a-b
+// 当b-a为负数时，a排在前面，当b-a为正数时，b排在a前面
+(a,b)->b-a
+// 当a-b为负数时，b排在前面，当b-a为正数时，a排在b前面
+(b,a)->a-b
+```
 
 # Function<T, R>
 1. R apply(T t)，这个apply方法的目的是激活的作用，如果我们有一个lambda对象是add，那么通过add.apply(x)来激活add对象。
@@ -187,7 +195,7 @@ public class MyTimerClass {
     }
 }
 ```
-1. 可以被定义在方法内部也可以在类内部作为一个field提供给这个类中其他方法进行使用
+2. 可以被定义在方法内部也可以在类内部作为一个field提供给这个类中其他方法进行使用
 ```java
 public class MyClass {
     // 这是一个在类内部、方法外部定义的匿名内部类
