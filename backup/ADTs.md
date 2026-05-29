@@ -222,6 +222,7 @@ TreeSet(SortedSet<E> s)
 ```
 
 ## SortedSet interface
+1. SortedSet接口有一些Set接口没有的方法，一般是使用Set接口除非你想使用一些SortedSet接口独有的方法。
 ```java
 // 可以自定义比较器，和treeset配合使用，如果依靠默认的比较器，返回null
 Comparator<? super E> comparator()

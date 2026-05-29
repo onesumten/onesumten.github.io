@@ -397,6 +397,9 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <span class="pl-c">// 创建一个空的treeset，但是会继承s的排序规则。</span>
 <span class="pl-en">TreeSet</span>(<span class="pl-s1">SortedSet</span>&lt;<span class="pl-s1">E</span>&gt; <span class="pl-s1">s</span>) </pre></div>
 <h2>SortedSet interface</h2>
+<ol>
+<li>SortedSet接口有一些Set接口没有的方法，一般是使用Set接口除非你想使用一些SortedSet接口独有的方法。</li>
+</ol>
 <div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-c">// 可以自定义比较器，和treeset配合使用，如果依靠默认的比较器，返回null</span>
 <span class="pl-smi">Comparator</span>&lt;? <span class="pl-en">super</span> <span class="pl-smi">E</span>&gt; <span class="pl-en">comparator</span>()
 <span class="pl-c">// 情况 A：使用自然排序（不传比较器）</span>
